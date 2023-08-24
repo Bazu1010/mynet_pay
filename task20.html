@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+
+<body>
+        <script>
+                //Question 17:
+                //Continue with the same program and calculate an individual’s NHDF using:
+                //i.e NHDF = gross_salary -  0.015
+
+
+                let basic_salary = parseFloat(prompt("Enter Basic_salary"))
+                let benefits = parseFloat(prompt("Enter Benefits"))
+
+
+                function calcGross(basic_salary, benefits) {
+
+
+                        gross = basic_salary + benefits;
+                        return gross;
+                }
+                let gs = calcGross(basic_salary, benefits)
+
+                console.log("Gross_salary: " + gs)
+
+                //NHIF
+
+                function calcNhif(gs) {
+                        let nhif_contribution = 0
+                        if (gs < 5999) {
+                                nhif_contribution = 150
+                        } else if (gs > 6000 && gs < 7999) {
+                                nhif_contribution = 300
+                        } else if (gs > 8000 && gs < 11999) {
+                                nhif_contribution = 400
+                        } else if (gs > 12000 && gs < 14999) {
+                                nhif_contribution = 500
+                        } else if (gs > 15000 && gs < 19999) {
+                                nhif_contribution = 600
+                        } else if (gs > 20000 && gs < 24999) {
+                                nhif_contribution = 750
+                        } else if (gs > 25000 && gs < 29999) {
+                                nhif_contribution = 850
+                        } else if (gs > 30000 && gs < 34999) {
+                                nhif_contribution = 900
+                        } else if (gs > 35000 && gs < 39999) {
+                                nhif_contribution = 950
+                        } else if (gs > 40000 && gs < 44999) {
+                                nhif_contribution = 1000
+                        } else if (gs > 45000 && gs < 49999) {
+                                nhif_contribution = 1100
+                        } else if (gs > 50000 && gs < 59999) {
+                                nhif_contribution = 1200
+                        } else if (gs > 60000 && gs < 69999) {
+                                nhif_contribution = 1300
+                        } else if (gs > 70000 && gs < 79999) {
+                                nhif_contribution = 1400
+                        } else if (gs > 80000 && gs < 89999) {
+                                nhif_contribution = 1500
+                        } else if (gs > 90000 && gs < 99999) {
+                                nhif_contribution = 1600
+                        } else if (gs > 99999) {
+                                nhif_contribution = 1700
+                        } else {
+                                console.log("Invalid")
+                        }
+                        return nhif_contribution
+                } let nhif = calcNhif(gs)
+                console.log("NHIF: " + nhif)
+
+                //NSSF
+
+                function calcNssf(gs) {
+
+                        let nssfR = 0.06;
+                        if (gs < 18000) {
+
+                                let ns_sf = (gs * nssfR)
+                                return ns_sf;
+                        }
+                        else {
+                                ns_sf = 18000 * 0.06
+                                return ns_sf;
+                        }
+
+                }
+                let nssf = calcNssf(gs)
+
+                console.log("NSSF: " + nssf);
+
+                //NHDF
+
+
+                function calcNhdf(gs) {
+
+                        let nhdfR = 0.03
+                        let nh_df = (gs * nhdfR)
+                        if(nh_df>2500){
+                                let nh_df = 2500
+                        }
+
+                        return nh_df;
+                }
+                let nhdf = calcNhdf(gs)
+
+                console.log("NHDF: " + nhdf);
+
+
+                //Taxable_income
+
+                function calcTaxable(gs) {
+
+                        let taxable_income = gs - (nssf + nhdf)
+                        return taxable_income;
+                }
+                let T_income = calcTaxable(gs)
+
+
+                console.log("Taxable_income: " + T_income)
+
+
+
+                //PAYE
+
+                function calcPaye ( T_income){
+
+                    let tRelief = 2400
+                    if (T_income<=24000){
+                        let pa_ye = 24000*0.1;
+                        return pa_ye;
+                    }else if(T_income>24000 && T_income<32333){
+                        let pa_ye = 2400+(T_income-24000)*0.25;
+                        return paye;
+                    }else if(T_income>32333 && T_income<=50000){
+                        pa_ye = (2400+2083.25)+(T_income-32333)*0.3
+                    }else{pa_ye = (2400+2083.25)+(T_income-32333)*0.3+(T_income-50000)*0.35}
+
+                    return pa_ye - tRelief;
+                }
+                let paye = calcPaye ( T_income)
+
+                console.log("PAYE: "+paye);
+
+                //Net_Salary
+
+                function calcNsalary(gs,nhif,nhdf,nssf,paye){
+                    let  net_salary = gs - (nhif + nhdf +  nssf + paye)
+                    return net_salary;
+
+                }
+                let nSalary = calcNsalary(gs,nhif,nhdf,nssf,paye)
+                console.log("Net_Salary: " + nSalary);
+
+
+
+
+
+
+
+
+        </script>
+</body>
+
+</html>
